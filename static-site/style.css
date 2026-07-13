@@ -2,6 +2,42 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { height: 100%; overflow: hidden; }
 
+/* ── Accessibility: visible keyboard focus (WCAG 2.4.7) ────────────────── */
+:focus-visible {
+  outline: 3px solid #93c5fd;      /* blue-300 — high contrast on dark UI */
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+/* Keep the ring inside tight scroll containers for list buttons */
+.letter-item:focus-visible { outline-offset: -2px; }
+
+/* Skip link — hidden until focused (WCAG 2.4.1 Bypass Blocks) */
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 100;
+  padding: 10px 16px;
+  background: #1e293b;
+  color: #f8fafc;
+  border: 2px solid #93c5fd;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top .15s ease;
+}
+.skip-link:focus { top: 12px; }
+
+/* Respect users who prefer reduced motion (WCAG 2.3.3) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 :root {
   /* Figma redesign-inspired palette (Slate + Blue) */
   --bg0:       #0b1220;           /* slate-950-ish */
@@ -16,7 +52,7 @@ html { height: 100%; overflow: hidden; }
   --warn:      #f59e0b;
   --danger:    #ef4444;           /* red-500 */
   --text:      #f8fafc;           /* slate-50 */
-  --muted:     rgba(148,163,184,.85);
+  --muted:     rgba(203,213,225,.92);  /* slate-300 — WCAG AA (>=4.5:1) on dark surfaces */
   --radius:    14px;
   --shadow:    0 18px 48px rgba(0,0,0,.45);
 }
@@ -215,6 +251,10 @@ h1 { font-size: 1.35rem; font-weight: 650; letter-spacing: .02em; white-space: n
 }
 
 .letter-item {
+  appearance: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
   padding: 10px 12px;
   border-radius: 12px;
   cursor: pointer;
@@ -299,7 +339,7 @@ h1 { font-size: 1.35rem; font-weight: 650; letter-spacing: .02em; white-space: n
   backdrop-filter: blur(4px);
 }
 .ref-placeholder-icon svg { color: rgba(255,255,255,.85); }
-.ref-placeholder-inner p { font-size: .85rem; color: rgba(255,255,255,.75); }
+.ref-placeholder-inner p { font-size: .85rem; color: rgba(255,255,255,.92); }
 .ref-video-wrap video {
   width: 100%;
   display: block;

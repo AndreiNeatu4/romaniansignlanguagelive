@@ -419,15 +419,63 @@ function selectLetter(item, url) {
   }
 }
 
+/* ── Keyboard navigation across the whole left sidebar (WCAG 2.1.1) ─────────
+   One continuous arrow-navigable sequence, in DOM order:
+     Alphabet header → letters → Semne header → signs.
+   ArrowDown / ArrowRight → next, ArrowUp / ArrowLeft → previous,
+   Home / End → first / last. Wraps at both ends. Collapsed (hidden) sections
+   are skipped automatically. Landing on a sign plays its reference video
+   (selection follows focus); landing on a section header just moves focus, so
+   Enter/Space can still expand or collapse it. Rebuilt on every keypress, so it
+   stays correct as sections open/close and async items load. */
+function selectItem(item) {
+  selectLetter(item, item.dataset.url || null);
+}
+
+// Every element a keyboard user can step onto inside the sidebar.
+const SIDEBAR_NAV_SELECTOR = '.sidebar-toggle, .letter-item';
+
+function enableSidebarKeyboardNav(sidebar) {
+  if (!sidebar) return;
+  sidebar.addEventListener('keydown', (e) => {
+    const current = e.target.closest(SIDEBAR_NAV_SELECTOR);
+    if (!current || !sidebar.contains(current)) return;
+
+    // Visible items only — offsetParent is null for anything in a hidden section.
+    const items = Array.from(sidebar.querySelectorAll(SIDEBAR_NAV_SELECTOR))
+      .filter((el) => el.offsetParent !== null);
+    const i = items.indexOf(current);
+    if (i === -1) return;
+
+    let next;
+    switch (e.key) {
+      case 'ArrowDown':
+      case 'ArrowRight': next = items[(i + 1) % items.length];              break;
+      case 'ArrowUp':
+      case 'ArrowLeft':  next = items[(i - 1 + items.length) % items.length]; break;
+      case 'Home':       next = items[0];                                   break;
+      case 'End':        next = items[items.length - 1];                    break;
+      default: return;   // let every other key (Tab, Enter, Space…) behave normally
+    }
+
+    e.preventDefault();  // stop the arrow keys from scrolling the sidebar
+    next.focus();
+    // Selection follows focus only for actual signs, not section headers.
+    if (next.classList.contains('letter-item')) selectItem(next);
+  });
+}
+
 async function fetchVideoList() {
   try {
     const res  = await fetch('./assets/videos.json');
     const data = await res.json();
     if (!data.videos || !data.videos.length) return;
     data.videos.forEach(({ letter, url }) => {
-      const item = document.createElement('div');
+      const item = document.createElement('button');
+      item.type = 'button';
       item.className = 'letter-item';
       item.textContent = letter;
+      item.dataset.url = url || '';
       item.addEventListener('click', () => selectLetter(item, url));
       letterList.appendChild(item);
     });
@@ -470,13 +518,20 @@ setCollapsed(btnToggleSemne, semneSection, semneCollapsed);
 
 if (semneList) {
   ['Hello', 'Thank you', 'Please', 'Yes', 'No', 'Help'].forEach((name) => {
-    const item = document.createElement('div');
+    const item = document.createElement('button');
+    item.type = 'button';
     item.className = 'letter-item';
     item.textContent = name;
+    item.dataset.url = '';
     item.addEventListener('click', () => selectLetter(item, null));
     semneList.appendChild(item);
   });
 }
+
+/* Enable arrow-key navigation across the entire left sidebar — section headers
+   and both sign lists — as one continuous sequence. Delegated on the container,
+   so it also covers the alphabet items loaded asynchronously by fetchVideoList. */
+enableSidebarKeyboardNav(document.getElementById('left-sidebar'));
 
 syncSidebarLayout();
 window.addEventListener('resize', syncSidebarLayout);

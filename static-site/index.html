@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
   <div class="app-shell">
     <header class="app-header">
       <div class="header-inner">
@@ -16,7 +17,7 @@
           </button>
 
           <h1>Sign Language Recognition</h1>
-          <span id="status-badge" class="badge badge-offline">Offline</span>
+          <span id="status-badge" class="badge badge-offline" role="status" aria-live="polite">Offline</span>
         </div>
 
         <button id="btn-right-menu" class="icon-btn" type="button" aria-label="Toggle controls menu">
@@ -27,7 +28,7 @@
 
     <div id="mobile-overlay" class="mobile-overlay hidden" aria-hidden="true"></div>
 
-    <main class="app-main">
+    <main id="main-content" class="app-main" tabindex="-1">
       <!-- ── Left sidebar: categorised letter list ── -->
       <aside id="left-sidebar" class="ref-panel sidebar">
         <div class="sidebar-inner">
@@ -45,7 +46,7 @@
           <div class="sidebar-section">
             <button id="btn-toggle-semne" class="sidebar-section-title sidebar-toggle" type="button" aria-expanded="false">
               <span class="chev chev-right" aria-hidden="true"></span>
-              <span>Semne</span>
+              <span lang="ro">Semne</span>
             </button>
             <div id="semne-section" class="sidebar-section-body hidden">
               <div id="semne-list" class="letter-list"></div>
@@ -89,7 +90,7 @@
         <section class="feed-card">
           <div class="feed-card-header">
             <div class="feed-title">Your Camera</div>
-            <div id="cam-subtitle" class="feed-subtitle">Camera stopped</div>
+            <div id="cam-subtitle" class="feed-subtitle" role="status" aria-live="polite">Camera stopped</div>
           </div>
 
           <section class="video-column">
@@ -115,7 +116,7 @@
 
         <!-- Mobile-only prediction -->
         <section class="mobile-only">
-          <div class="prediction-box" id="prediction-box-mobile">
+          <div class="prediction-box" id="prediction-box-mobile" role="status" aria-live="polite" aria-atomic="true">
             <div id="pred-letter-mobile" class="pred-letter">—</div>
             <div id="pred-confidence-mobile" class="pred-conf">waiting for buffer…</div>
           </div>
@@ -204,7 +205,7 @@
           </div>
 
           <div class="desktop-only sidebar-block">
-            <div class="prediction-box" id="prediction-box">
+            <div class="prediction-box" id="prediction-box" role="status" aria-live="polite" aria-atomic="true">
               <div id="pred-letter" class="pred-letter">—</div>
               <div id="pred-confidence" class="pred-conf">waiting for buffer…</div>
             </div>
@@ -213,6 +214,7 @@
           <div class="sidebar-block">
             <h3 class="section-title">Keyboard Shortcuts</h3>
             <ul class="shortcuts">
+              <li><span>Browse sidebar (headers + signs)</span><span><kbd>↑</kbd> <kbd>↓</kbd></span></li>
               <li><span>Reset buffer</span><kbd>R</kbd></li>
               <li><span>Toggle mirror</span><kbd>M</kbd></li>
               <li><span>Start / stop camera</span><kbd>S</kbd></li>
