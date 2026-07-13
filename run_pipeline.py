@@ -160,8 +160,9 @@ def main():
     print_timing_summary(stage_timings)
 
     print("\nYour trained model is at: models/alphabet/best_model.pth")
-    print("\nTo test it:")
-    print("  python application/realtime_recognition.py")
+    print("\nTo ship it to the Cloudflare static site:")
+    print("  python static-site/tools/export_onnx.py")
+    print("  python static-site/tools/build_assets.py")
 
     return 0
 

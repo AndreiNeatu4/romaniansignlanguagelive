@@ -1,0 +1,17 @@
+{
+  "images_processed": 1168,
+  "sequences_saved": 11320,
+  "skipped_no_hand": 360,
+  "sequence_length": 45,
+  "feature_size": 216,
+  "directional_letters_skipped": [
+    "J",
+    "Q",
+    "S",
+    "Y",
+    "Z",
+    "Ș",
+    "Ț"
+  ],
+  "created_at": "2026-06-25T17:26:59.337504"
+}

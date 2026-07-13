@@ -187,7 +187,7 @@ LEARNING_RATE = 0.001
 
 # Model architecture hyperparameters
 LSTM_UNITS = [128, 64]  # Number of units in each LSTM layer
-DROPOUT = 0.2  # Lower dropout for small dataset (less regularization needed)
+DROPOUT = 0.3  # Dropout for regularization (raised from 0.2 to fight overfitting)
 
 # Use class-weighted CrossEntropy (inverse frequency) so under-represented
 # moving letters (J, Z, Q, Ș, Ț) get full gradient signal.
@@ -195,6 +195,13 @@ USE_CLASS_WEIGHTS = True
 
 # Gradient clipping threshold (helps stability with attention pooling).
 GRAD_CLIP_NORM = 1.0
+
+# AdamW weight decay (decoupled L2 regularization).
+WEIGHT_DECAY = 1e-4
+
+# Label smoothing for CrossEntropy: prevents the model from becoming
+# over-confident and improves probability calibration.
+LABEL_SMOOTHING = 0.1
 
 # Transformer-specific settings (only used if MODEL_TYPE='transformer')
 TRANSFORMER_NUM_HEADS = 4

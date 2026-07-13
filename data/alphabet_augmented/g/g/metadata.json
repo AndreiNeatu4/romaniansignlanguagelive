@@ -1,0 +1,166 @@
+{
+  "video_path": "C:\\Users\\Andrei Neatu\\Desktop\\romaniansignlanguagelive-main\\romaniansignlanguagelive-main\\alphabet\\g\\g.mp4",
+  "video_name": "g",
+  "gesture_label": "g",
+  "is_directional": false,
+  "source_fps": 25.0,
+  "target_fps": 30,
+  "frames_after_resample": 66,
+  "total_sequences": 40,
+  "skipped_low_quality": 0,
+  "augmentations": [
+    {
+      "augmentation": "s0_sp0.90_r0",
+      "num_sequences": 2,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s0_sp1.00_r0",
+      "num_sequences": 1,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s0_sp1.10_r0",
+      "num_sequences": 1,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s1_sp0.90_r0",
+      "num_sequences": 2,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s1_sp1.00_r0",
+      "num_sequences": 1,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s1_sp1.10_r0",
+      "num_sequences": 1,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s2_sp0.90_r0",
+      "num_sequences": 2,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s2_sp1.00_r0",
+      "num_sequences": 1,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s2_sp1.10_r0",
+      "num_sequences": 1,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s3_sp0.90_r0",
+      "num_sequences": 2,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s3_sp1.00_r0",
+      "num_sequences": 1,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s3_sp1.10_r0",
+      "num_sequences": 1,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s4_sp0.90_r0",
+      "num_sequences": 2,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s4_sp1.00_r0",
+      "num_sequences": 1,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s4_sp1.10_r0",
+      "num_sequences": 1,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s5_sp0.90_r0",
+      "num_sequences": 2,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s5_sp1.00_r0",
+      "num_sequences": 1,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s5_sp1.10_r0",
+      "num_sequences": 1,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s6_sp0.90_r0",
+      "num_sequences": 2,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s6_sp1.00_r0",
+      "num_sequences": 1,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s6_sp1.10_r0",
+      "num_sequences": 1,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s7_sp0.90_r0",
+      "num_sequences": 2,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s7_sp1.00_r0",
+      "num_sequences": 1,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s7_sp1.10_r0",
+      "num_sequences": 1,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s8_sp0.90_r0",
+      "num_sequences": 2,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s8_sp1.00_r0",
+      "num_sequences": 1,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s8_sp1.10_r0",
+      "num_sequences": 1,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s9_sp0.90_r0",
+      "num_sequences": 2,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s9_sp1.00_r0",
+      "num_sequences": 1,
+      "dropped_low_quality": 0
+    },
+    {
+      "augmentation": "s9_sp1.10_r0",
+      "num_sequences": 1,
+      "dropped_low_quality": 0
+    }
+  ],
+  "sequence_length": 45,
+  "feature_size": 216,
+  "created_at": "2026-06-25T17:16:58.101762"
+}

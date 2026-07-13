@@ -446,7 +446,8 @@ def validate(model, val_loader, criterion, device):
 
 
 def train_model(model, train_loader, val_loader, epochs=100, learning_rate=0.001,
-                patience=15, output_dir='models', class_weights=None, grad_clip=1.0):
+                patience=15, output_dir='models', class_weights=None, grad_clip=1.0,
+                weight_decay=1e-4, label_smoothing=0.1):
     """Train the model with early stopping."""
 
     output_dir = Path(output_dir)
@@ -455,10 +456,11 @@ def train_model(model, train_loader, val_loader, epochs=100, learning_rate=0.001
     if class_weights is not None:
         cw = torch.as_tensor(class_weights, dtype=torch.float32, device=device)
         print(f"Using class-weighted CrossEntropy. Min/max weight: {cw.min().item():.3f} / {cw.max().item():.3f}")
-        criterion = nn.CrossEntropyLoss(weight=cw)
+        criterion = nn.CrossEntropyLoss(weight=cw, label_smoothing=label_smoothing)
     else:
-        criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(model.parameters(), lr=learning_rate)
+        criterion = nn.CrossEntropyLoss(label_smoothing=label_smoothing)
+    # AdamW decouples weight decay from the gradient update (true L2 regularization).
+    optimizer = optim.AdamW(model.parameters(), lr=learning_rate, weight_decay=weight_decay)
     scheduler = optim.lr_scheduler.ReduceLROnPlateau(
         optimizer, mode='min', factor=0.5, patience=5
     )
@@ -623,6 +625,8 @@ def main():
         LSTM_UNITS = [128, 64]
         USE_CLASS_WEIGHTS = True
         GRAD_CLIP_NORM = 1.0
+        WEIGHT_DECAY = 1e-4
+        LABEL_SMOOTHING = 0.1
     else:
         if not config.validate_config():
             print("\nPlease fix configuration errors in config.py before continuing.")
@@ -638,6 +642,8 @@ def main():
         LSTM_UNITS = config.LSTM_UNITS
         USE_CLASS_WEIGHTS = getattr(config, 'USE_CLASS_WEIGHTS', True)
         GRAD_CLIP_NORM = getattr(config, 'GRAD_CLIP_NORM', 1.0)
+        WEIGHT_DECAY = getattr(config, 'WEIGHT_DECAY', 1e-4)
+        LABEL_SMOOTHING = getattr(config, 'LABEL_SMOOTHING', 0.1)
 
     # Load data
     data = load_dataset(DATA_DIR)
@@ -729,6 +735,8 @@ def main():
         output_dir=MODEL_DIR,
         class_weights=class_weights,
         grad_clip=GRAD_CLIP_NORM,
+        weight_decay=WEIGHT_DECAY,
+        label_smoothing=LABEL_SMOOTHING,
     )
 
     # Plot training history

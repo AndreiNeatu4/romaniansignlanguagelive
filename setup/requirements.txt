@@ -1,6 +1,9 @@
 # Core dependencies for gesture data extraction
 opencv-python>=4.8.0
-mediapipe>=0.10.14
+# Pinned: mediapipe 0.10.15+ removed the legacy mp.solutions API that the
+# extractors use, and 0.10.35 also dropped Python 3.8 support. 0.10.14 keeps
+# mp.solutions and runs on Python 3.9-3.11.
+mediapipe==0.10.14
 numpy>=1.24.0,<2.0
 tqdm>=4.65.0
 
