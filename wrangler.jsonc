@@ -1,7 +1,7 @@
 {
   // Static-only Cloudflare deployment: no Worker script, just serve the
   // pre-built static site. Cloudflare's Git build picks this up automatically.
-  "name": "romanian-sign-language-live",
+  "name": "romaniansignlanguagelive",
   "compatibility_date": "2025-06-01",
   "assets": {
     "directory": "./static-site"
